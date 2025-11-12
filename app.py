@@ -17,6 +17,11 @@ app.secret_key = os.environ.get("SECRET_KEY", "dev_secret_change_this")
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 app.config["DATABASE"] = DB_PATH
 
+# ✅ Make datetime available in all templates
+@app.context_processor
+def inject_datetime():
+    return {'datetime': datetime}
+
 # --- DB helpers ---
 def get_db():
     db = getattr(g, "_database", None)
