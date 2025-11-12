@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row align-items-center">
+  <div class="col-md-7">
+    <h1>Welcome to Community Connect</h1>
+    <p class="lead">A platform connecting students and elders through knowledge sharing and support. Book appointments, share reviews, and join the community.</p>
+    <p>
+      <a href="{{ url_for('book') }}" class="btn btn-primary">Book an Appointment</a>
+      <a href="{{ url_for('about') }}" class="btn btn-outline-secondary">Learn More</a>
+    </p>
+  </div>
+  <div class="col-md-5">
+    <img src="{{ url_for('static', filename='logo.jpg') }}" class="img-fluid rounded shadow-sm" alt="Community Connect">
+  </div>
+</div>
+{% endblock %}

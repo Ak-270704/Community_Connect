@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Book an Appointment</h2>
+
+<form method="post" class="row g-3 mb-4">
+  <div class="col-md-6">
+    <label class="form-label">Name</label>
+    <input name="name" class="form-control" value="{{ session.get('user_name', '') }}" required>
+  </div>
+  <div class="col-md-6">
+    <label class="form-label">Email</label>
+    <input name="email" type="email" class="form-control" value="{{ '' }}" required>
+  </div>
+  <div class="col-md-4">
+    <label class="form-label">Date</label>
+    <input name="date" type="date" class="form-control" required>
+  </div>
+  <div class="col-md-4">
+    <label class="form-label">Time</label>
+    <input name="time" type="time" class="form-control" required>
+  </div>
+  <div class="col-md-4">
+    <label class="form-label">Reason</label>
+    <input name="reason" class="form-control" placeholder="Short reason (optional)">
+  </div>
+  <div class="col-12">
+    <button class="btn btn-success" type="submit">Book Appointment</button>
+  </div>
+</form>
+
+<h4>Your Appointments</h4>
+{% if appointments %}
+  <table class="table table-striped">
+    <thead><tr><th>#</th><th>Date</th><th>Time</th><th>Reason</th><th>Booked At</th></tr></thead>
+    <tbody>
+      {% for a in appointments %}
+        <tr>
+          <td>{{ a.id }}</td>
+          <td>{{ a.appt_date }}</td>
+          <td>{{ a.appt_time }}</td>
+          <td>{{ a.reason }}</td>
+          <td>{{ a.created_at }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <p class="text-muted">You have no appointments yet.</p>
+{% endif %}
+{% endblock %}

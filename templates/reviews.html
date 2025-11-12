@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Reviews</h2>
+
+{% if session.get('user_id') %}
+<form method="post" class="mb-4">
+  <div class="mb-3">
+    <label class="form-label">Name</label>
+    <input name="name" class="form-control" value="{{ session.get('user_name') }}" required>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Rating</label>
+    <select name="rating" class="form-select" required>
+      <option value="">Choose...</option>
+      {% for r in range(5,0,-1) %}
+        <option value="{{ r }}">{{ r }} star{{ 's' if r>1 }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Comment</label>
+    <textarea name="comment" class="form-control" rows="3"></textarea>
+  </div>
+  <button class="btn btn-primary" type="submit">Submit Review</button>
+</form>
+{% else %}
+  <p><a href="{{ url_for('login') }}">Log in</a> to leave a review.</p>
+{% endif %}
+
+<hr>
+
+<div class="list-group">
+  {% for r in reviews %}
+    <div class="list-group-item">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">{{ r.name }} <small class="text-muted">({{ r.rating }}★)</small></h5>
+        <small>{{ r.created_at }}</small>
+      </div>
+      <p class="mb-1">{{ r.comment }}</p>
+      <small class="text-muted">By: {{ r.user_email or 'Guest' }}</small>
+    </div>
+  {% else %}
+    <p class="text-muted">No reviews yet — be the first!</p>
+  {% endfor %}
+</div>
+{% endblock %}

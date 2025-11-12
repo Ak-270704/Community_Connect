@@ -1,0 +1,11 @@
+/* simple custom styles */
+.logo {
+  height: 48px;
+  width: 48px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.brand-text { line-height: 1; }
+
+footer { font-size: 0.9rem; }
